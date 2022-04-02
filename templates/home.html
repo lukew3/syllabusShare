@@ -1,4 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<p>Test</p>
+<form>
+	<label>School:</label>
+	<select name="school" id="schoolSelect">
+		<option value="-1" selected>Select School...</option>
+		<option value="0">Lorain County Community College</option>
+		<option value="1">Ohio State University</option>
+	</select>
+	<label>Course:</label>
+	<select name="course" disabled id="schoolSelect">
+		<option value="0">Select School First</option>
+	</select>
+	<input type="submit" value="Find"/>
+
 {% endblock content %}

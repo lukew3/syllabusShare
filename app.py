@@ -6,21 +6,11 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 upload_path = os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER'])
 
 
+"""
 @app.route("/")
 def home():
     return render_template('home.html')
-
-@app.route("/s")
-def schools():
-    return render_template('schools.html')
-
-@app.route("/s/<school>")
-def school_courses(school=None):
-    return render_template('school_courses.html')
-
-@app.route("/s/<school>/<course>")
-def course_syllabi(school=None, course=None):
-    return render_template('course_syllabi.html')
+"""
 
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
@@ -31,8 +21,20 @@ def upload():
         filename = "example.pdf"
         f.save(path + filename)
 
-@app.route('/s/<school>/<course>/<filename>')
-def download_file(filename=None):
+@app.route("/")
+def schools():
+    return render_template('schools.html')
+
+@app.route("/<school>")
+def school_courses(school=None):
+    return render_template('school_courses.html')
+
+@app.route("/<school>/<course>")
+def course_syllabi(school=None, course=None):
+    return render_template('course_syllabi.html')
+
+@app.route('/<school>/<course>/<filename>')
+def download_file(school=None, course=None, filename=None):
     if not filename:
         return 404
     # check for file in directory first?

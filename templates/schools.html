@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>Schools</h2>
+    <p>Welcome to Syllabus Share. Select a school to get started:</p>
     <ul>
         {% for school in schools %}
             <li><a href="/s/{{ school.name }}">{{ school.name }}</a></li>

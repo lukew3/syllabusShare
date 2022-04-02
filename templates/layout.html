@@ -11,13 +11,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-	<a href="/"><h2>Syllabus Share</h2></a>
-	<div id='navRight'>
-		<a href="/s" class="navItem navLink">School List</a>
-		<a href="/upload" id="navUploadButton" class="navItem">Upload</a>
+	<script>function $(i) {document.getElementById(i)};</script>
+	<nav>
+		<a href="/"><h2>Syllabus Share</h2></a>
+		<div id='navRight'>
+			<a href="/s" class="navItem navLink">School List</a>
+			<a href="/upload" id="navUploadButton" class="navItem">Upload</a>
+		</div>
+	</nav>
+	<div id="content">
+		{% block content %}
+	    	{% endblock %}
 	</div>
-    </nav>
-    {% block content %}
-    {% endblock %}
 </body>
