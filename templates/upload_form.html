@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <label for='school'>School:</label>
+    <input name='school' type='text' placeholder='School'/><br>
+    <label for='course'>Course:</label>
+    <input name='course' type='text' placeholder='Course'/><br>
+    <label for='professor'>Professor:</label>
+    <input name='professor' type='text' placeholder='Professor'/><br>
+    <label for='year'>Year:</label>
+    <input name='year' type='number' placeholder='Year'/><br>
+    <label for='attachment'>File:</label>
+    <input name='attachment' type='file' accept='.pdf'/><br>
+    <input type='submit' value='Submit' />
+  </form>
+{% endblock content %}

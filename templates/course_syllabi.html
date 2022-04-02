@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>{{ course_name }}</h2>
+    <ul>
+        {% for syllabus in syllabi %}
+            <li><a href="/s/{{school_name }}/{{ course_name }}/{{ syllabus.filename }}">{{ syllabus.instructor }} - {{ syllabus.year }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

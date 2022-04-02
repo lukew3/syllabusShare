@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Schools</h2>
+    <ul>
+        {% for school in schools %}
+            <li><a href="/s/{{ school.name }}">{{ school.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
