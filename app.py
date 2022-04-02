@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024 # 50 MB
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024 # 10 MB
 db = SQLAlchemy(app)
 upload_path = os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER'])
 if not os.path.isdir(upload_path):
