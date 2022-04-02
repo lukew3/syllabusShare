@@ -87,14 +87,14 @@ def download_file(filename=None):
 
 @app.route("/")
 def schools():
-    schools = School.query.all()
+    schools = School.query.order_by(School.name.asc()).all()
     return render_template('schools.html', schools=schools)
 
 @app.route("/<school_name_safe>")
 def school_courses(school_name_safe=None):
     school_name = school_name_safe.replace('+', ' ')
     school = School.query.filter_by(name=school_name).first()
-    courses = Course.query.filter_by(school_id=school.id).all()
+    courses = Course.query.filter_by(school_id=school.id).order_by(Course.name.asc()).all()
     return render_template('school_courses.html', school_name=school.name, school_name_safe=school_name_safe, courses=courses)
 
 @app.route("/<school_name_safe>/<course_name_safe>")
@@ -102,7 +102,7 @@ def course_syllabi(school_name_safe=None, course_name_safe=None):
     school_name = school_name_safe.replace('+', ' ')
     course_name = course_name_safe.replace('+', ' ')
     course = Course.query.filter_by(name=course_name).first()
-    syllabi = Syllabus.query.filter_by(course_id=course.id).all()
+    syllabi = Syllabus.query.filter_by(course_id=course.id).order_by(Syllabus.instructor.asc()).order_by(Syllabus.year.asc()).all()
     return render_template('course_syllabi.html', school_name=school_name, course_name=course.name, syllabi=syllabi)
 
 if __name__ == '__main__':
