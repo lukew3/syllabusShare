@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+body {
+	background-color: #E0E0E0;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+nav {
+	padding: 10px;
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+	background-color: #d2d2d2;
+}
+nav h2 {
+	line-height: 40px;
+}
+#navRight {
+	display: flex;
+}
+.navItem {
+	height: 2em;
+	margin-left: 5px;
+	padding: 0 10px;
+	line-height: 40px;
+	color: black;
+}
+#navUploadButton {
+	height: 40px;
+	border-radius: 2px;
+	background-color: rgb(57, 165, 183);
+	color: #282828;
+}
+
+/* HOME */
+
