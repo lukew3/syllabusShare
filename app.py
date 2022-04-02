@@ -8,6 +8,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024 # 50 MB
 db = SQLAlchemy(app)
 upload_path = os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER'])
+if not os.path.isdir(upload_path):
+    os.makedirs(upload_path)
 
 class School(db.Model):
     id = db.Column(db.Integer, primary_key=True)
