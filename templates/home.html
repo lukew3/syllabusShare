@@ -1,16 +1,52 @@
 {% extends "layout.html" %}
 {% block content %}
-<form>
+<form id='homeForm'>
 	<label>School:</label>
 	<select name="school" id="schoolSelect">
 		<option value="-1" selected>Select School...</option>
-		<option value="0">Lorain County Community College</option>
-		<option value="1">Ohio State University</option>
+		{% for school in schools %}
+			<option value="{{ school.name }}">{{ school.name }}</option>
+		{% endfor %}
 	</select>
 	<label>Course:</label>
-	<select name="course" disabled id="schoolSelect">
+	<select name="course" disabled id="courseSelect">
 		<option value="0">Select School First</option>
 	</select>
 	<input type="submit" value="Find"/>
+</form>
+<script>
+	document.getElementById("homeForm").addEventListener('submit', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		if (document.getElementById("schoolSelect").value === '-1') return;
+		let school = document.getElementById("schoolSelect").value.split(' ').join('+');
+		let course = document.getElementById("courseSelect").value.split(' ').join('+'); 
+		window.location.assign(`/${school}/${course}`);
+		
+	});
+	const courseSelect = document.getElementById('courseSelect');
+	function loadCourses() {
+		if (document.getElementById("schoolSelect").value === '-1') {
+			courseSelect.setAttribute("disabled", "");
+			return;
+		}
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", `/getCourses/${document.getElementById("schoolSelect").value}`, false);
+		xhr.onload = () => {
+			courseSelect.innerHTML = "";
+			let data = JSON.parse(xhr.response);
+			data.forEach((item) => {
+				let option = document.createElement('option');
+				option.setAttribute('value', item.name);
+				option.innerHTML = item.name;
+				courseSelect.appendChild(option);
+			})
+			courseSelect.removeAttribute("disabled");
+		}
+		xhr.send();
+	}
+	document.getElementById("schoolSelect").onchange = () => { loadCourses(); }
+	if (document.getElementById("schoolSelect").value !== -1) loadCourses();
+</script>
 
 {% endblock content %}

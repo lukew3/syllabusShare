@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -89,14 +89,32 @@ def download_file(filename=None):
     return send_from_directory(directory=upload_path, path=filename)
 
 @app.route("/")
+def home():
+    schools = School.query.order_by(School.name.asc()).all()
+    return render_template('home.html', schools=schools)
+
+@app.route("/getCourses/<school_name>")
+def get_courses(school_name=None):
+    school_name = school_name.replace('+', ' ')
+    school = School.query.filter_by(name=school_name).first()
+    courses = Course.query.filter_by(school_id=school.id).order_by(Course.name.asc()).all()
+    courses_json_ready = []
+    for course in courses:
+        courses_json_ready.append({"id": course.id, "name": course.name})
+    return jsonify(courses_json_ready)
+
+@app.route("/schools")
 def schools():
     schools = School.query.order_by(School.name.asc()).all()
     return render_template('schools.html', schools=schools)
+
 
 @app.route("/<school_name_safe>")
 def school_courses(school_name_safe=None):
     school_name = school_name_safe.replace('+', ' ')
     school = School.query.filter_by(name=school_name).first()
+    if not school:
+        return '<p>Not found</p>'
     courses = Course.query.filter_by(school_id=school.id).order_by(Course.name.asc()).all()
     return render_template('school_courses.html', school_name=school.name, school_name_safe=school_name_safe, courses=courses)
 
