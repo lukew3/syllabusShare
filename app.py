@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -71,15 +71,16 @@ def upload():
             db.session.add(new_course)
             db.session.commit()
             course = new_course
-        print(request.form['year'])
-        new_syllabi = Syllabus(
-            instructor=request.form['instructor'],
-            year=int(request.form['year']),
-            course_id=course.id
-        )
-        db.session.add(new_syllabi)
-        db.session.commit()
-        return "<p>Success</p>"
+        duplicate = Syllabus.query.filter_by(instructor=request.form['instructor'], year=int(request.form['year']), course_id=course.id).first()
+        if not duplicate:
+            new_syllabi = Syllabus(
+                instructor=request.form['instructor'],
+                year=int(request.form['year']),
+                course_id=course.id
+            )
+            db.session.add(new_syllabi)
+            db.session.commit()
+        return redirect(url_for('upload'))
 
 @app.route('/download/<filename>')
 def download_file(filename=None):
