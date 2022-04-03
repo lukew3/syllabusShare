@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from turbo_flask import Turbo
 import os
 
 app = Flask(__name__)
+turbo = Turbo(app)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -94,6 +96,20 @@ def home():
     schools = School.query.order_by(School.name.asc()).all()
     return render_template('home.html', schools=schools)
 
+@app.route("/homeFormSubmit", methods=['POST'])
+def homeFormSubmit():
+    print(request.form)
+    if 'course' in request.form:
+        if request.form['course'] == 'All Courses':
+            return redirect(url_for("school_courses", school_name_safe=request.form['school']))
+        elif request.form['course'] != -1 and request.form['school'] != -1:
+            return redirect(url_for("course_syllabi", school_name_safe=request.form['school'], course_name_safe=request.form['course']))
+        else:
+            return redirect(url_for("home"))
+    else:
+        return redirect(url_for("home"))
+
+
 @app.route("/getCourses/<school_name>")
 def get_courses(school_name=None):
     school_name = school_name.replace('+', ' ')
@@ -121,8 +137,6 @@ def school_courses(school_name_safe=None):
 
 @app.route("/<school_name_safe>/<course_name_safe>")
 def course_syllabi(school_name_safe=None, course_name_safe=None):
-    if course_name_safe == "All+Courses":
-        return redirect(url_for("school_courses", school_name_safe=school_name_safe))
     school_name = school_name_safe.replace('+', ' ')
     course_name = course_name_safe.replace('+', ' ')
     course = Course.query.filter_by(name=course_name).first()

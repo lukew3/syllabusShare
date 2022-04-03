@@ -1,11 +1,17 @@
 click==8.1.2
 Flask==2.1.1
+flask-sock==0.5.2
 Flask-SQLAlchemy==2.5.1
+Flask-Turbo==0.0.0
 greenlet==1.1.2
+h11==0.13.0
 importlib-metadata==4.11.3
 itsdangerous==2.1.2
 Jinja2==3.1.1
 MarkupSafe==2.1.1
+simple-websocket==0.5.1
 SQLAlchemy==1.4.34
+Turbo-Flask==0.8.0
 Werkzeug==2.1.1
+wsproto==1.1.0
 zipp==3.7.0

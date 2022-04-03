@@ -2,7 +2,7 @@
 {% block content %}
 <h1 id="homeTitle">Look Before You Leap</h1>
 <p id="homeDescription">Find the syllabus for your next class so that you can choose the right course and instructor and know what to expect <i>before</i> you start</p>
-<form id='homeForm'>
+<form action='/homeFormSubmit' method='post' id='homeForm'>
 	<div>
 		<label>School:</label>
 		<select name="school" id="schoolSelect">
@@ -21,17 +21,8 @@
 	<input type="submit" value="Find"/>
 </form>
 <script>
-	document.getElementById("homeForm").addEventListener('submit', (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		if (document.getElementById("schoolSelect").value === '-1') return;
-		let school = document.getElementById("schoolSelect").value.split(' ').join('+');
-		let course = document.getElementById("courseSelect").value.split(' ').join('+'); 
-		window.location.assign(`/${school}/${course}`);
-		
-	});
-	const courseSelect = document.getElementById('courseSelect');
 	function loadCourses() {
+		const courseSelect = document.getElementById('courseSelect');
 		if (document.getElementById("schoolSelect").value === '-1') {
 			courseSelect.setAttribute("disabled", "");
 			return;
