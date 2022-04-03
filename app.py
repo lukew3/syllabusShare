@@ -5,6 +5,7 @@ import os
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024 # 10 MB
 db = SQLAlchemy(app)
 upload_path = os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER'])
@@ -120,6 +121,8 @@ def school_courses(school_name_safe=None):
 
 @app.route("/<school_name_safe>/<course_name_safe>")
 def course_syllabi(school_name_safe=None, course_name_safe=None):
+    if course_name_safe == "All+Courses":
+        return redirect(url_for("school_courses", school_name_safe=school_name_safe))
     school_name = school_name_safe.replace('+', ' ')
     course_name = course_name_safe.replace('+', ' ')
     course = Course.query.filter_by(name=course_name).first()

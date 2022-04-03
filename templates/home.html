@@ -13,7 +13,7 @@
 		</select>
 	</div>
 	<div>
-		<label>Course</label>
+		<label>Course:</label>
 		<select name="course" disabled id="courseSelect">
 			<option value="0">Select School First</option>
 		</select>
@@ -41,6 +41,7 @@
 		xhr.onload = () => {
 			courseSelect.innerHTML = "";
 			let data = JSON.parse(xhr.response);
+			data.unshift({id:-1, name: "All Courses"})
 			data.forEach((item) => {
 				let option = document.createElement('option');
 				option.setAttribute('value', item.name);
