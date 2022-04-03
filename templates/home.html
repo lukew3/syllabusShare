@@ -1,17 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
+<h1 id="homeTitle">Look Before You Leap</h1>
+<p id="homeDescription">Find the syllabus for your next class so that you can choose the right instructor and know what to expect <i>before</i> you start</p>
 <form id='homeForm'>
-	<label>School:</label>
-	<select name="school" id="schoolSelect">
-		<option value="-1" selected>Select School...</option>
-		{% for school in schools %}
-			<option value="{{ school.name }}">{{ school.name }}</option>
-		{% endfor %}
-	</select>
-	<label>Course:</label>
-	<select name="course" disabled id="courseSelect">
-		<option value="0">Select School First</option>
-	</select>
+	<div>
+		<label>School:</label>
+		<select name="school" id="schoolSelect">
+			<option value="-1" selected>Select School...</option>
+			{% for school in schools %}
+				<option value="{{ school.name }}">{{ school.name }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div>
+		<label>Course</label>
+		<select name="course" disabled id="courseSelect">
+			<option value="0">Select School First</option>
+		</select>
+	</div>
 	<input type="submit" value="Find"/>
 </form>
 <script>

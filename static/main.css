@@ -37,4 +37,27 @@ nav h2 {
 }
 #content {
 	margin: 10px;
-
+}
+#homeTitle {
+	margin:auto;
+	margin-top: 15vh;
+	font-size: 4em;
+	font-weight: bold;
+	text-align: center;
+}
+#homeDescription {
+	text-align: center;
+	width: 90vw;
+	max-width: 500px;
+	margin: auto;
+	margin-top: 2vh;
+}
+#homeForm {
+	margin:auto;
+	margin-top: 10vh;
+	max-width: 500px;
+	display: flex;
+}
+#schoolSelect, #courseSelect {
+	margin-right: 5px;
+}
