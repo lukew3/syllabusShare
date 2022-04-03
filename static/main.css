@@ -9,6 +9,12 @@ a {
 	text-decoration: none;
 	color: black;
 }
+a:hover {
+	opacity: 70%;
+}
+ul {
+	list-style: none;
+}
 nav {
 	padding: 10px;
 	height: 40px;
@@ -36,7 +42,11 @@ nav h2 {
 	color: #282828;
 }
 #content {
-	margin: 10px;
+	margin: auto;
+	margin-top: 5vh;
+	padding: 0 20px;
+	width: 90vw;
+	max-width: 700px;
 }
 #homeTitle {
 	margin:auto;
@@ -60,4 +70,19 @@ nav h2 {
 }
 #schoolSelect, #courseSelect {
 	margin-right: 10px;
+}
+.pageTitle {
+	margin-bottom: 10px;
+}
+li {
+	width: 100%;
+}
+.listLink p {
+	background-color: #d2d2d2;
+	padding: 5px 10px;
+	border-radius: 3px;
+	margin-bottom: 3px;
+}
+.listLink p:hover {
+	background-color: #b2b2b2;
 }

@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    <p>Welcome to Syllabus Share. Select a school to get started:</p>
-    <ul>
-        {% for school in schools %}
-            <li><a href="/{{ school.name.replace(' ', '+') }}">{{ school.name }}</a></li>
-        {% endfor %}
-    </ul>
+	<h2 class="pageTitle">Schools</h2>
+	<ul>
+        	{% for school in schools %}
+		<li class="listLink" >
+			<a href="/{{ school.name.replace(' ', '+') }}">
+				<p>{{ school.name }}</p>
+			</a>
+		</li>
+		{% endfor %}
+    	</ul>
 {% endblock content %}

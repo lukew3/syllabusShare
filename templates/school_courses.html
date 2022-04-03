@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>{{ school_name }}</h2>
+    <h2 class="pageTitle">{{ school_name }}</h2>
     <ul>
         {% for course in courses %}
-            <li><a href="/{{ school_name_safe }}/{{ course.name.replace(' ', '+') }}">{{ course.name }}</a></li>
+	<li class="listLink" >
+		<a href="/{{ school_name_safe }}/{{ course.name.replace(' ', '+') }}">
+			<p>{{ course.name }}</p>
+		</a>
+	</li>
         {% endfor %}
     </ul>
 {% endblock content %}
