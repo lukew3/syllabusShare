@@ -1,9 +1,0 @@
-{% extends "layout.html" %}
-{% block content %}
-    <h2 class="pageTitle">{{ course_name }}</h2>
-    <ul>
-        {% for syllabus in syllabi %}
-	<li><a class="listLink" href="/download/{{ course_name.replace(' ', '+') + '_' + school_name.replace(' ', '+') + '_' + syllabus.instructor.replace(' ', '+') + '_' + '{}'.format(syllabus.year) }}.pdf"><p>{{ syllabus.instructor + ' - ' + '{}'.format(syllabus.year) }}</p></a></li>
-        {% endfor %}
-    </ul>
-{% endblock content %}
